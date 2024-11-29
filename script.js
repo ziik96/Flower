@@ -95,14 +95,26 @@ handleFlowerClick(flowerContainer) {
         return leaf;
     }
 
-    createBud() {
-        const bud = document.createElement('div');
-        bud.classList.add('bud');
-        const randomSize = this.getRandom(20, 40);
-        const randomColor = `hsl(25, 100%, ${this.getRandom(50, 50)}%)`;
-        bud.style.setProperty('--bud-size', `${randomSize}px`);
-        bud.style.setProperty('--bud-color', randomColor);
-        return bud;
+ createBud() {
+    const bud = document.createElement('div');
+    bud.classList.add('bud');
+    
+    // Генерируем случайный цвет в диапазоне от желтого до оранжевого
+    const randomHue = this.getRandom(30, 60); // Диапазон для желтого и оранжевого
+    const randomSaturation = 100; // Максимальная насыщенность
+    const randomLightness = this.getRandom(50, 70); // Светлота в пределах нормальных значений
+    
+    // Применяем случайный цвет
+    const randomColor = `hsl(${randomHue}, ${randomSaturation}%, ${randomLightness}%)`;
+    
+    // Применяем полученный цвет к бутону
+    bud.style.setProperty('--bud-color', randomColor);
+    
+    // Размер и анимация роста
+    const randomSize = this.getRandom(20, 40);
+    bud.style.setProperty('--bud-size', `${randomSize}px`);
+    
+    return bud;
     }
 
     setFlowerPosition(flowerContainer) {
