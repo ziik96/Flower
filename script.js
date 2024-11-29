@@ -23,9 +23,23 @@ class Flower {
             return;
         }
 
-        const flowerContainer = this.createFlowerContainer();
-        this.setFlowerPosition(flowerContainer);
-        flowerContainer.addEventListener('mouseenter', () => this.handleMouseEnter(flowerContainer));
+     const flowerContainer = this.createFlowerContainer();
+    this.setFlowerPosition(flowerContainer);
+
+    // Добавляем обработчики для touchstart и click
+    flowerContainer.addEventListener('touchstart', () => this.handleTouch(flowerContainer), { passive: true });
+    flowerContainer.addEventListener('click', () => this.handleClick(flowerContainer));
+}
+
+handleTouch(flowerContainer) {
+    flowerContainer.removeEventListener('touchstart', this.handleTouch); // Удаляем обработчик после первого касания
+    this.handleMouseEnter(flowerContainer);
+}
+
+handleClick(flowerContainer) {
+    flowerContainer.removeEventListener('click', this.handleClick); // Удаляем обработчик после первого клика
+    this.handleMouseEnter(flowerContainer);
+
     }
 
     createFlowerContainer() {
