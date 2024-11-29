@@ -17,30 +17,48 @@ class Flower {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    createFlower() {
-        if (this.counter <= 0) {
-            clearInterval(this.flowerInterval);
-            return;
-        }
+ createFlower() {
+    if (this.counter <= 0) {
+        clearInterval(this.flowerInterval);
+        return;
+    }
 
-     const flowerContainer = this.createFlowerContainer();
+    const flowerContainer = this.createFlowerContainer();
     this.setFlowerPosition(flowerContainer);
 
-    // Добавляем обработчики для touchstart и click
-    flowerContainer.addEventListener('touchstart', () => this.handleTouch(flowerContainer), { passive: true });
-    flowerContainer.addEventListener('click', () => this.handleClick(flowerContainer));
+    // Добавляем обработчик события для десктопа и мобильных устройств
+    flowerContainer.addEventListener('click', (event) => this.handleClick(event, flowerContainer));
+    flowerContainer.addEventListener('touchend', (event) => this.handleTouch(event, flowerContainer), { passive: true });
 }
 
-handleTouch(flowerContainer) {
-    flowerContainer.removeEventListener('touchstart', this.handleTouch); // Удаляем обработчик после первого касания
-    this.handleMouseEnter(flowerContainer);
+handleClick(event, flowerContainer) {
+    // Привязываем правильный контекст для родительского элемента
+    flowerContainer.parentElement.classList.toggle.call(flowerContainer.parentElement.classList, 'clicked');
+    this.handleFlowerClick(flowerContainer);
 }
 
-handleClick(flowerContainer) {
-    flowerContainer.removeEventListener('click', this.handleClick); // Удаляем обработчик после первого клика
-    this.handleMouseEnter(flowerContainer);
+handleTouch(event, flowerContainer) {
+    // То же самое для мобильных устройств
+    flowerContainer.parentElement.classList.toggle.call(flowerContainer.parentElement.classList, 'clicked');
+    this.handleFlowerClick(flowerContainer);
+}
 
-    }
+handleFlowerClick(flowerContainer) {
+    flowerContainer.removeEventListener('click', this.handleClick);
+    flowerContainer.removeEventListener('touchend', this.handleTouch);
+    flowerContainer.style.animation = 'fly-away 1s ease forwards';
+    setTimeout(() => {
+        flowerContainer.style.animation = 'fade-out 1s ease forwards';
+        flowerContainer.remove();
+        if (this.counter > 0) {
+            this.counter--;
+            this.updateCounterDisplay();
+            if (this.counter === 0) {
+                this.showCongratulationMessage();
+            }
+        }
+    }, 1000);
+}
 
     createFlowerContainer() {
         const flowerContainer = document.createElement('div');
