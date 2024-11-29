@@ -16,18 +16,9 @@ body {
     top: 20px;
     left: 20px; /* Перемещаем его в верхний левый угол */
     font-size: 20px;
-    z-index: 10; /* Счетчик всегда будет на переднем плане */
+    z-index: 1; /* Счетчик всегда будет на переднем плане */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Тень текста */
 }
-
-@media screen and (max-width: 480px) {
-    #counter {
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 16px;
-        max-width: 80%; /* Больше места для текста */
-    }
 
 #counterText {
     display: inline-block;
