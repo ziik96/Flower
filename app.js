@@ -135,7 +135,7 @@ function handleTemplateChange() {
   generateBtnEl.disabled = false;
 }
 
-function handleGenerateClick(event) {
+async function handleGenerateClick(event) {
   event.preventDefault();
   const template = getSelectedTemplate();
   if (!template) return;
@@ -150,6 +150,9 @@ function handleGenerateClick(event) {
   // Построить HTML для печати
   const html = template.buildHtml(formData);
   printAreaEl.innerHTML = html;
+
+  // Дождаться подгрузки шрифтов и раскладки
+  await ensureReadyForPrint();
 
   // Генерация PDF
   const fileName = safeFileName(template.fileName(formData) || `${template.name}.pdf`);
@@ -224,7 +227,7 @@ function generatePdfFromElement(containerEl, fileName) {
     margin: 0,
     filename: fileName,
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
+    html2canvas: { scale: Math.max(2, Math.ceil(window.devicePixelRatio || 1)), useCORS: true },
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     pagebreak: { mode: ["css", "legacy"] },
   };
@@ -233,6 +236,16 @@ function generatePdfFromElement(containerEl, fileName) {
 }
 
 // Вспомогательные функции
+async function ensureReadyForPrint() {
+  try {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+  } catch (_) {}
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  await new Promise((r) => setTimeout(r, 30));
+}
+
 function formatDateRu(value) {
   if (!value) {
     const d = new Date();
