@@ -1,0 +1,113 @@
+:root {
+  --bg: #0b1020;
+  --panel: #111832;
+  --accent: #6aa9ff;
+  --text: #e7ebf3;
+  --muted: #a2acc4;
+  --error: #ff6a6a;
+  --focus: #b3d4fc;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 10% -10%, #1b2450, transparent),
+    radial-gradient(1000px 700px at 90% 0%, #092048, transparent), var(--bg);
+}
+
+.container {
+  max-width: 880px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin: 8px 0 20px;
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.panel-title { margin: 0 0 8px; font-size: 16px; }
+
+.label { display: block; font-weight: 600; margin-bottom: 8px; }
+
+.select, .input, .textarea {
+  width: 100%;
+  background: #0c1226;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.select:focus, .input:focus, .textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(106,169,255,0.25);
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .input-row { grid-template-columns: 1fr; }
+}
+
+.form .field {
+  margin-bottom: 12px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.field .hint { color: var(--muted); font-size: 12px; }
+
+.actions { display: flex; gap: 12px; align-items: center; }
+
+.btn {
+  background: linear-gradient(180deg, #3a7bfd, #2e63d8);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .05s ease, filter .15s;
+}
+
+.btn:disabled {
+  filter: grayscale(0.4) brightness(0.7);
+  cursor: not-allowed;
+}
+
+.btn:not(:disabled):active { transform: translateY(1px); }
+
+.muted { color: var(--muted); margin-top: 8px; }
+
+.status { font-size: 13px; color: var(--muted); }
+
+.footer { margin-top: 24px; text-align: center; color: var(--muted); font-size: 13px; }
