@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Генератор документов PDF</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Генератор документов PDF</h1>
+
+      <section class="panel">
+        <label for="templateSelect" class="label">Выберите шаблон документа</label>
+        <select id="templateSelect" class="select"></select>
+        <p id="templateDescription" class="muted"></p>
+      </section>
+
+      <section id="fieldsSection" class="panel">
+        <h2 class="panel-title">Данные для заполнения</h2>
+        <form id="dynamicForm" class="form" novalidate></form>
+      </section>
+
+      <section class="panel actions">
+        <button id="generateBtn" class="btn" disabled>Сгенерировать PDF</button>
+        <span id="status" class="status" aria-live="polite"></span>
+      </section>
+
+      <footer class="footer">
+        <span class="muted">PDF генерируется локально в браузере с использованием pdfmake (поддерживает кириллицу).</span>
+      </footer>
+    </main>
+
+    <!-- pdfmake with embedded Roboto fonts (supports кириллицу) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js" integrity="sha512-a+IhJH1m6D9m8yHIG7+yc9H9Kf+o42Y4k4zY05aYUJ66/B6Qh8EVDd1dsYLT77QclqP12vJqlz2q4m/8QdI4ag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.min.js" integrity="sha512-cr2G1u3VFl5ep4ayQK4gKvyyodDsoYk7TnbBzftHofp7ITpvxxS8HflaorW7xTpLZrBIvio4qHdR+5lrKyX6Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
