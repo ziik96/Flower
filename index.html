@@ -1,25 +1,46 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Генератор документов в PDF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Генератор документов в PDF</h1>
+      <p class="subtitle">Выберите шаблон, заполните поля и скачайте готовый PDF</p>
+    </header>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Animated Flowers</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-
-<body>
-    <div id="counter">
-        <div id="counterTextWrapper"> <!-- Обёртка для текста -->
-            <div id="counterText">Осталось собрать:</div>
-            <div id="counterValueWrapper"> <!-- Обёртка для счётчика с тёмно-серым фоном -->
-                <span id="counterValue">100</span>
-            </div>
+    <main class="container">
+      <section class="card">
+        <div class="field-group">
+          <label for="template-select">Шаблон документа</label>
+          <select id="template-select" class="select">
+            <option value="" selected disabled>— Выберите шаблон —</option>
+          </select>
         </div>
-    </div>
-    <div id="congratulation" class="congratulation">Поздравляем с 8 Марта!</div>
-    <script src="script.js"></script>
-</body>
 
+        <form id="dynamic-form" class="form-grid" novalidate></form>
+
+        <div class="actions">
+          <button id="generate-btn" class="btn primary" disabled>Сгенерировать PDF</button>
+        </div>
+      </section>
+
+      <!-- Невидимая область, где будет собираться HTML для печати -->
+      <div id="print-area" class="print-area" aria-hidden="true" style="position: absolute; left: -99999px; top: -99999px;"></div>
+    </main>
+
+    <footer class="app-footer">
+      <span>© 2025 Генератор документов</span>
+    </footer>
+
+    <!-- html2pdf.js (включает html2canvas и jsPDF) -->
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
 </html>
