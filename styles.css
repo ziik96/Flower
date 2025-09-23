@@ -112,7 +112,16 @@ label {
 
 /* Печать / PDF область */
 .print-area {
+<<<<<<< HEAD
   /* спрятано визуально в index.html inline */
+=======
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+>>>>>>> parent of e89b45b (с)
 }
 
 /* Оформление PDF документа (A4) */

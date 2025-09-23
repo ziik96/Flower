@@ -135,7 +135,11 @@ function handleTemplateChange() {
   generateBtnEl.disabled = false;
 }
 
+<<<<<<< HEAD
 function handleGenerateClick(event) {
+=======
+async function handleGenerateClick(event) {
+>>>>>>> parent of e89b45b (с)
   event.preventDefault();
   const template = getSelectedTemplate();
   if (!template) return;
@@ -151,6 +155,12 @@ function handleGenerateClick(event) {
   const html = template.buildHtml(formData);
   printAreaEl.innerHTML = html;
 
+<<<<<<< HEAD
+=======
+  // Дождаться подгрузки шрифтов и раскладки
+  await ensureReadyForPrint();
+
+>>>>>>> parent of e89b45b (с)
   // Генерация PDF
   const fileName = safeFileName(template.fileName(formData) || `${template.name}.pdf`);
   generatePdfFromElement(printAreaEl, fileName);
@@ -224,7 +234,11 @@ function generatePdfFromElement(containerEl, fileName) {
     margin: 0,
     filename: fileName,
     image: { type: "jpeg", quality: 0.98 },
+<<<<<<< HEAD
     html2canvas: { scale: 2, useCORS: true },
+=======
+    html2canvas: { scale: Math.max(2, Math.ceil(window.devicePixelRatio || 1)), useCORS: true },
+>>>>>>> parent of e89b45b (с)
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     pagebreak: { mode: ["css", "legacy"] },
   };
@@ -233,6 +247,19 @@ function generatePdfFromElement(containerEl, fileName) {
 }
 
 // Вспомогательные функции
+<<<<<<< HEAD
+=======
+async function ensureReadyForPrint() {
+  try {
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+  } catch (_) {}
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  await new Promise((r) => setTimeout(r, 30));
+}
+
+>>>>>>> parent of e89b45b (с)
 function formatDateRu(value) {
   if (!value) {
     const d = new Date();
